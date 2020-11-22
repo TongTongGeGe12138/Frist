@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="用户名" name="name"><br>
+
+        <input type="file" name="pic">
+
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        // FormData  可以通过FormDate来收寄到表单的数据（ 文本信息 + 文件信息）
+        //  步骤： 
+        // 1、 给form注册submit提交事件
+        // 2、 阻止form的默认行为
+        // 3、 new FormData（form）实例对象
+        //    将form表单DOM 对象作为参数传递到new FormData中， 这样FormData就可以收集到表单数据了
+
+        let form = document.querySelector('form');
+
+        form.onsubmit = function (e) {
+            e.preventDafault();
+
+            let fd = new FormData(form);
+
+            //注意：直接打印fd实例对象，无法查看收集到表单数据
+            //consle.log（fd）;
+            //fd实例对象去调用get方法
+            //fd.get(key);//可以需要查看的数据（表单的name属性值）
+            // fd.getAll(key);//获取到指定name的所有的数据，返回值是个数组
+            //fd.set(key,value)// 往fd中设置值
+            // fd.append(key，value) //往fd中追加值
+
+            // console.log(fd.get('name'));
+            // console.log(fd.get('pic'));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

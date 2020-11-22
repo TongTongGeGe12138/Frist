@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="用户名" name="name"><br>
+
+        <input name="hobby" type="checkbox" value="篮球">篮球
+        <input name="hobby" type="checkbox" value="看电影">看电影
+        <input name="hobby" type="checkbox" value="看书">看书
+
+        <select name="city" multiple id="">
+            <option value="">请选择城市</option>
+            <option value="上海">上海</option>
+            <option value="北京">北京</option>
+            <option value="深圳">深圳</option>
+        </select>
+
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        // 需要：点击提交，将手机到的form中的数据(普通，不含文件)提交到服务器上
+        // 接口文档地址： https://www.showdoc.com.cn/ajaxapi?page_id=3754625338400838
+
+        let form = document.querySelector('form');
+
+        form.onsubmit = function (e) {
+            e.preverntDafault();
+            //formDate 手机form数据
+            let fd = FormData(form);//fd实例对象
+            console.log(fd);
+
+            //原生XHR
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST',"http://www.liulongbin.top:3006/api/formdata");
+
+            //POST 方式是比GET 多个请求头，
+            //content-type:application/x-www-form-urlencoded
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

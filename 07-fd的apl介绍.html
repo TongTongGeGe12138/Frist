@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="用户名" name="name"><br>
+
+        <input name="hobby" type="checkbox" value="篮球">篮球
+        <input name="hobby" type="checkbox" value="看电影">看电影
+        <input name="hobby" type="checkbox" value="看书">看书
+
+        <select name="city" multiple id="">
+            <option value="">请选择城市</option>
+            <option value="上海">上海</option>
+            <option value="北京">北京</option>
+            <option value="深圳">深圳</option>
+        </select>
+
+        <input type="file" name="pic">
+
+        <input type="submit" value="提交">
+    </form>
+    <script>
+        // FormDate 可以通过FormDate来收集到表单的数据(文本信息 + 文件信息)
+
+        //步骤：
+        // 1、给form注册sunbmit提交事件
+        // 2、阻止form的默认行为
+        // 3、new ForDayte(form) 实例对象
+        //   将form表单DOM 对象作为参数传递到new FormData中，这样FormDate就可以收集到表单数据了
+
+        let form = document.querySelector('form');
+
+        form.onsubmit = function (e) {
+            e.preventDafault();
+
+            let fd = new FormData(form);
+
+            // 注意: 直接打印fd 实例对象,无法查看收集到的表单数据
+            //console.log(fd);
+            //fd实例对象去调用get方法
+            //fd.get(key);// key需要查看额数据（表单的name属性值）
+            // fd.getAll(key);// 获取到指定name的所有的数据，返回值是个数据
+            //fd.set(key,value)// 往fd中设置(修改)值
+            //fd.append(key,value)// 往fd中追加值
+            //console.log(fd.get("name"));
+            //console.log(fd.get('pic'));
+
+            //console.log(fd.get("hobby"));
+            //console.log(fd.getAll("hobby"));
+            //console.log(fd.get("city"));
+            //console.log(fd.getAll("city"));
+
+            // 修改
+            // fd.set("name","demo");
+
+            // t添加
+            // fd.set("a","is a");
+            // console.log(fd.get('name'));
+            // console.log(fd.get("a"));
+
+            //append只能追加fd中没有的数据
+            fd.append('b', "is b");
+            console.log(fd.get("b"));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

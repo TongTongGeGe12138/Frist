@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 800px;
+            border: 1px solid #ccc;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <h2>老王的快乐生活</h2>
+        <p>姓名: 老王头</p>
+        <p>年龄: 39</p>
+        <p>性别: 男</p>
+        <p>爱好: 异性</p>
+        <p>
+            好友们:
+            <a href="#">老张家的媳妇</a>
+            <a href="#">老黄家的媳妇</a>
+            <a href="#">老陈家的媳妇</a>
+            <a href="#">隔壁人家的媳妇</a>
+            <a href="#">村头王寡妇</a>
+        </p> -->
+    </div>
+
+    <script src="template-web.js"></script>
+    <script type="text/html" id="tpl">
+        <h2>老王的快乐生活</h2>
+        <p>姓名: {{name}}</p>
+        <p>年龄: {{age}}</p>
+        <p>注册时间： {{regTime | formatTime}}</p>
+        <p>注册时间： {{regTime | formatTime}}</p>
+        <p>
+            好友们:
+            <a href="#">{{firends[0]}}</a>
+            <a href="#">老黄家的媳妇</a>
+            <a href="#">老陈家的媳妇</a>
+            <a href="#">隔壁人家的媳妇</a>
+            <a href="#">村头王寡妇</a>
+        </p>
+    </script>
+
+    <script>
+        // 从后端获取到的关于老王的个人信息
+        var info = {
+            name: "老王",
+            age: 45,
+            gender: "男",
+            hobby: "异性",
+            // 注册账号时间
+            regTime: "Wed May 10 2017 19:20:35 GMT+0800 (中国标准时间)",
+            firends: [
+                "老张家的小媳妇",
+                "老黄家的媳妇",
+                "老陈家的媳妇",
+                "隔壁人家的媳妇",
+                "村头王寡妇",
+            ]
+        };
+
+        // 补零函数
+        function paddZero(n) {
+            return n < 10 ? "0" + n : n;
+        }
+
+        /*  过滤器的使用
+          1、 先往模板中导入一个过滤器函数（ 用来处理时间）
+          2、 可以在模板中使用过滤器函数
+    
+          // 1、template.defaults.imports.过滤器函数名 = function（msg）{
+              // 形参msg 就是咱们需要处理的数据
+              // 需要将处理好的数据给return 处理
+              // return处理好的数据
+          }*/
+
+        //  2、  
+        // {{数据 | 过滤器函数名}}
+        // 数据会作为过滤器函数的实参
+
+        template.defaults.imports.formatTime = function (time) {
+            let d = new Date(time);
+            let y = d.getFullYear();
+            let m = paddZero(d.getMonth() + 1);
+            let day = d.getDate();
+            let h = d.getHours();
+            let mm = d.getMinutes();
+            let s = d.getSeconds();
+            return `${y}/${m}/${day} ${h}:${mm}:${s}`;
+        }
+
+        // 将数据 +模板内容组合起来，得到你需要的页面结构==》》通过template()
+        //let htmlStr = template(模板的id名，数据);
+        // 第一个参数只能写id名， 不能是其他(比如类名)
+
+        let htmlStr = template("tpl", info);
+        document.querySelector("box").innerHTML = htmlStr;
+
+
+    </script>
+</body>
+
+</html>
